@@ -1,0 +1,6 @@
+<!--pages/my/infoApprove/infoApprove.wxml-->
+<view class="info">
+  <image class="infoIcon" src="../../../images/waiting.png"></image>
+  <view class="text">您的信息正在等待审核</view>
+  <view class="text">请稍后再进入查看</view>
+</view>

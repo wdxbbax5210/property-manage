@@ -1,0 +1,38 @@
+/* pages/my/my.wxss */
+.my {
+  /* padding: 12px; */
+  height: 100%;
+}
+
+.myHeader {
+  height: 3rem;
+  background-color: #fff;
+  text-align: center;
+  padding: 15px 12px;
+  border-top:1px solid #ededed;
+  border-bottom:1px solid #ededed;
+  display: flex;
+  margin-top:12px;
+}
+.userinfo {
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.userName {
+  padding: 0 12px;
+  font-size: 14px;
+  margin-top: 10px;
+  color: #4A4A4A;
+}
+.btn-login {
+  border:none!important;
+  height:60rpx;
+  line-height:60rpx;
+  font-size:28rpx;
+  background-color:#fff;
+  margin-left: 20rpx;
+  color: #38ADFF;
+}

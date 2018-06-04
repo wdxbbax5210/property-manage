@@ -1,0 +1,101 @@
+<!--pages/home/home.wxml-->
+<view class="page">
+  <!-- <view class="search-wrap">
+    <wxc-search class="search"
+                show-icon="{{false}}"
+                bg-color="#fff"
+                button="搜索"
+                btn-color="#38ADFF"
+                bind:input="onInput"
+                bind:submit="submitForm"
+                bind:confirm="onSearch"></wxc-search>
+  </view> -->
+  <!-- <swiper indicator-dots="{{indicatorDots}}"  
+          autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">  
+        <block wx:for="{{imgUrls}}"  wx:key="{{key}}">  
+          <swiper-item>  
+            <navigator url="{{item.link}}" hover-class="navigator-hover">  
+              <image src="{{item.url}}" class="slide-image" width="355" height="150"/>  
+            </navigator>   
+          </swiper-item>  
+        </block>  
+  </swiper>   -->
+  <!-- <view class="fee">
+    <view class="iconPart t-FB1">
+      <image src="../../images/wuye.png"></image>
+      <view>物业费</view>
+    </view>
+    <view class="iconPart t-FB1">
+      <image src="../../images/dianfee.png"></image>
+      <view>电费</view>
+    </view>
+    <view class="iconPart t-FB1">
+      <image src="../../images/waterfee.png"></image>
+      <view>水费</view>
+    </view>
+    <view class="iconPart t-FB1">
+      <image src="../../images/ranqifee.png"></image>
+      <view>燃气费</view>
+    </view>
+  </view> -->
+  <wxc-tab
+    bind:tabchange="onClick"
+    default-index="{{0}}"
+    component-id="c2"
+    animate="{{true}}"
+    class="tab"
+    active-text-color="#38ADFF"
+    active-line-color="#38ADFF"
+    line-color="#ededed"
+  >
+    <wxc-tab-panel
+      wx:for="{{tabs}}"
+      wx:for-item="tab"
+      wx:key="{{tab.content}}"
+      tab-index="{{index}}"
+      component-id="c2"
+      label="{{tab.title}}"
+    >
+      <view class="filter t-FBH">
+        <view class="filterItem t-FB1">
+          <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+            <view class="picker">
+              <text>{{array[selected]}}</text>
+              <image src="../../images/arrow-down.png"></image>
+            </view>
+          </picker>
+        </view>
+        <view class="filterItem t-FB1">
+          <picker mode="date" value="{{date}}" fields="month" start="2015-09"  bindchange="bindDateChange">
+            <view class="picker">
+              <text>{{date?date: "全部"}}</text>
+              <image src="../../images/arrow-down.png"></image>
+            </view>
+          </picker>
+        </view>
+      </view>
+      <scroll-view scroll-y style="height: auto;" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
+        <view class="scroll-view-head scroll-view-item t-FBH">
+          <view class="t-FB1">单元编号</view>
+          <view class="t-FB1">收费项目</view>
+          <view class="t-FB1">所属月份</view>
+          <view class="t-FB1">应收金额</view>
+          <view class="t-FB1">开票月份</view>
+          <view class="t-FB1">缴费状态</view>
+        </view>
+        <view wx:for="{{list}}"  wx:for-index="index">
+          <view class="scroll-view-item t-FBH">
+            <view class="t-FB1">301</view>
+            <view class="t-FB1">电费</view>
+            <view class="t-FB1">2018年6月</view>
+            <view class="t-FB1">12700</view>
+            <view class="t-FB1">2018年8月</view>
+            <view class="t-FB1">未缴费</view>
+          </view>
+        </view>
+      </scroll-view>
+    </wxc-tab-panel>
+  </wxc-tab>
+  <wxc-dialog class="wxc-dialog" title="物业管理" content="物业管理申请获取您的昵称信息" confirm-text="点击去授权" cancel-text="取消" bindconfirm="onConfirm" bindcancel="onCancel">
+  </wxc-dialog>
+</view>
