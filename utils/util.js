@@ -13,7 +13,23 @@ const formatNumber = n => {
   n = n.toString()
   return n[1] ? n : '0' + n
 }
-
+const setTitle = (title) => {
+  wx.setNavigationBarTitle({
+    title: title
+  })
+}
+const showLoading = (title) => {
+  wx.showLoading({
+    title: title,
+    mask: false
+  })
+}
+const hideLoading = () => {
+  wx.hideLoading()
+}
 module.exports = {
-  formatTime: formatTime
+  formatTime: formatTime,
+  setTitle: setTitle,
+  showLoading: showLoading,
+  hideLoading: hideLoading
 }

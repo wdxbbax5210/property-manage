@@ -1,0 +1,16 @@
+/* pages/my/infoApprove/infoApprove.wxss */
+.info {
+  text-align: center;
+  margin-top: 30%;
+}
+.infoIcon {
+  margin: 0 auto;
+  width: 200rpx;
+  height: 200rpx;
+  margin-bottom: 20rpx;
+}
+.text {
+  font-size: 32rpx;
+  color: #666;
+  line-height: 60rpx;
+}
