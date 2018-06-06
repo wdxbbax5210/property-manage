@@ -3,8 +3,8 @@
     "pages/home/home",
     "pages/my/my",
     "pages/logs/logs",
-    "pages/approveList/approvelist",
     "pages/feeSearchResult/feeSearchResult",
+    "pages/approveList/approvelist",
     "pages/feeEntry/feeEntry",
     "pages/my/infoApprove/infoApprove"
   ],

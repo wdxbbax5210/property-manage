@@ -43,13 +43,16 @@ Page({
     selected: 0,
     array: ['全部', '已缴费', '未缴费'],
     date: '',
-    list: [1,2,3,4,5]
+    list: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
   },
   bindDateChange: function (e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
       date: e.detail.value
     })
+  },
+  lower: function (e) {
+    console.log(e)
   },
   bindPickerChange: function (e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
@@ -75,9 +78,8 @@ Page({
       success: function (res) {
         console.log(res)
         //已经授权 跳转到首页
-        if (!res.authSetting['scope.userInfo']) {
+        if (res.authSetting['scope.userInfo']) {
           //从cookie中获取用户信息 给后台
-          console.log(header)
         } else {
           //没有授权 引导用户授权
           let dialogComponent = t.selectComponent('.wxc-dialog')
