@@ -26,7 +26,8 @@ Page({
               code: res.code,
               userInfo: userInfo
             },
-            success: () => {
+            success: (data) => {
+              console.log(data)
               let dialogComponent = t.selectComponent('.wxc-dialog')
               dialogComponent && dialogComponent.show();
             }

@@ -77,7 +77,7 @@ Page({
         //已经授权 跳转到首页
         if (!res.authSetting['scope.userInfo']) {
           //从cookie中获取用户信息 给后台
-          console.log(header)
+          //console.log(header)
         } else {
           //没有授权 引导用户授权
           let dialogComponent = t.selectComponent('.wxc-dialog')

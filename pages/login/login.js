@@ -34,7 +34,7 @@ Page({
               })
             }
           })
-
+          
         } else {
           console.log('登录失败！' + res.errMsg)
         }
@@ -53,7 +53,7 @@ Page({
       success: function (res) {
         console.log(res)
         //已经授权 跳转到首页
-        if (res.authSetting['scope.userInfo']) {
+        /*if (res.authSetting['scope.userInfo']) {
           //从cookie中获取用户信息
           wx.switchTab({
             url: '../home/home',
@@ -62,7 +62,7 @@ Page({
         }else{ 
           //没有授权 调取登录信息
           t.login();
-        }
+        }*/
       }
     })
   },
