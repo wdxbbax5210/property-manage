@@ -36,3 +36,6 @@
   margin-left: 20rpx;
   color: #38ADFF;
 }
+.hide {
+  display: none;
+}

@@ -6,7 +6,7 @@
     </view>
     <view class="userName t-FBH"> 
       <open-data type="userNickName"></open-data>
-      <button class="btn-login t-FB1" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGetUserInfo">点击授权</button>
+      <button class="btn-login t-FB1 {{ifShow ? '': 'hide'}}" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGetUserInfo">点击授权</button>
     </view>
   </view>
   <!-- <view class="wrap-common">

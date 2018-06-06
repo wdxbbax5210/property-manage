@@ -83,7 +83,7 @@
           <view class="t-FB1">开票月份</view>
           <view class="t-FB1">缴费状态</view>
         </view>
-        <view wx:for="{{list}}"  wx:for-index="index">
+        <view wx:for="{{list}}"  wx:for-index="index" wx:key="index">
           <view class="scroll-view-item t-FBH">
             <view class="t-FB1">301</view>
             <view class="t-FB1">电费</view>

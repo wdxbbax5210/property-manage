@@ -9,6 +9,7 @@ Page({
   data: {
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     logged: false, //是否登录
+    ifShow: true, //是否显示点击授权按钮
   },
   login: function (userInfo) {
     if (this.data.logged) return
@@ -20,7 +21,7 @@ Page({
           //发起网络请求
           wx.request({
             url: 'https://229492634.miss-xia-property-manage.club/user/login',
-            header: header,
+            // header: header,
             method: "POST",
             data: {
               code: res.code,
@@ -30,6 +31,9 @@ Page({
               console.log(data)
               let dialogComponent = t.selectComponent('.wxc-dialog')
               dialogComponent && dialogComponent.show();
+              t.setData({
+                ifShow: false
+              })
             }
           })
         } else {
@@ -47,6 +51,18 @@ Page({
    */
   onLoad: function (options) {
     util.setTitle("我的");
+    let t = this;
+    //判断是否已授权 授权过就设置ifShow为false
+    wx.getSetting({
+      success: function (res) {
+        console.log(res)
+        if (res.authSetting['scope.userInfo']) {
+          t.setData({
+            ifShow: false
+          })
+        }
+      }
+    })
   },
   onGetUserInfo: function (e) {
     let t = this;
