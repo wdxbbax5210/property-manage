@@ -27,9 +27,21 @@ const showLoading = (title) => {
 const hideLoading = () => {
   wx.hideLoading()
 }
+const getUserInfo = ()=>{
+  let user = {};
+  wx.getStorageSync({
+    key: 'userInfo',
+    success: function (res) {
+      user = res.data.data
+    }
+  })
+  return user;
+}
+
 module.exports = {
   formatTime: formatTime,
   setTitle: setTitle,
   showLoading: showLoading,
-  hideLoading: hideLoading
+  hideLoading: hideLoading,
+  getUserInfo: getUserInfo,
 }

@@ -1,0 +1,29 @@
+/* pages/feeList/feeList.wxss */
+.feeList {
+  height: auto;
+  background-color: #fff;
+  padding: 24rpx;
+}
+.feeItem{
+  border-bottom: 1px solid #ededed;
+  height: 88rpx;
+  line-height: 88rpx;
+  font-size: 28rpx;
+  color: #333;
+}
+.add {
+  height: 88rpx;
+  line-height: 88rpx;
+  font-size: 32rpx;
+  color: #333;
+  margin-top: 48rpx;
+}
+.btn {
+  margin-left: 24rpx;
+  color: #38ADFF;
+}
+.wxc-dialog .input {
+  font-size: 28rpx;
+  color: #333;
+  margin: 24rpx 0;
+}

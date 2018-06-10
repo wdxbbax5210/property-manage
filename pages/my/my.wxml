@@ -6,22 +6,25 @@
     </view>
     <view class="userName t-FBH"> 
       <open-data type="userNickName"></open-data>
-      <button class="btn-login t-FB1 {{ifShow ? '': 'hide'}}" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGetUserInfo">点击授权</button>
+      <!-- {{ifShow ? '': 'hide'}} -->
+      
     </view>
   </view>
   <!-- <view class="wrap-common">
   </view> -->
   <view class="wrap-common">
-    <view class="item" bindtap='getApproveList'>
+    <view class="item {{(userInfo.data.userType == 0 || userInfo.data.userType == 1) ? '' : 'hide'}}" bindtap='getApproveList'>
       <view class="title">用户信息审核</view>
       <image class="img" src="../../images/arrow-right.png"></image>
     </view>
-    <view class="item" bindtap='goToFeeEntry'>
+    <!-- <view class="item" bindtap='goToFeeEntry'>
       <view class="title">费用录入</view>
+      <image class="img" src="../../images/arrow-right.png"></image>
+    </view> -->
+    <view class="item" bindtap='goToFeeList'>
+      <view class="title">收费项目列表</view>
       <image class="img" src="../../images/arrow-right.png"></image>
     </view>
   </view>
-  <wxc-dialog class="wxc-dialog" title="物业管理" content="你的登录申请已经提交，请耐心等待" confirm-text="知道了" bindconfirm="onConfirm">  
-  </wxc-dialog>  
 </view>
 

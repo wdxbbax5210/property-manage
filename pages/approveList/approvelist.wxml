@@ -1,19 +1,18 @@
 <!--pages/approveList/approvelist.wxml-->
 <view>
   <view class="tab t-FBH">
-    <view class="tab-item t-FB1 {{activeTab == 1 ? 'active':''}}"  data-active="1" bindtap='onChangeTab'>待审核</view>
-    <view class="tab-item t-FB1 {{activeTab == 2 ? 'active':''}}" data-active="2" bindtap='onChangeTab'>已通过</view>
-    <view class="tab-item t-FB1 {{activeTab == 3 ? 'active':''}}" data-active="3" bindtap='onChangeTab'>未通过</view>
+    <view class="tab-item t-FB1 {{activeTab == 0 ? 'active':''}}"  data-active="0" bindtap='onChangeTab'>待审核</view>
+     <view class="tab-item t-FB1 {{activeTab == 1 ? 'active':''}}" data-active="1" bindtap='onChangeTab'>普通用户</view>
+    <view class="tab-item t-FB1 {{activeTab == 7 ? 'active':''}}" data-active="7" bindtap='onChangeTab'>普通员工</view> 
+    <view class="tab-item t-FB1 {{activeTab == 8 ? 'active':''}}" data-active="8" bindtap='onChangeTab'>管理员</view> 
   </view>
   <scroll-view scroll-y style="height: auto;" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
     <view class="user-list"  wx:for="{{list}}"  wx:for-index="index" wx:key="index">
       <view class="user-item t-FBH">
-        <view class="name">郭文芳</view>
-        <view class="operate-btn">通过</view>
-      </view>
-      <view class="user-item t-FBH">
-        <view class="name">郭文芳</view>
-        <view class="operate-btn">撤销授权</view>
+        <view class="name t-FB1">郭文芳{{item.id}}</view>
+        <view class="operate-btn " bindtap='userVerify' data-item="{{item}}">设为普通用户</view>
+        <view class="operate-btn {{userType == 1 ?'hide':''}}" bindtap='userVerify' data-item="{{item}}">设为普通员工</view>
+        <view class="operate-btn {{userType == 1 || userType == 7 ?'hide':''}}" data-item="{{item}}" bindtap='userVerify'>设为管理员</view>
       </view>
     </view>
   </scroll-view>

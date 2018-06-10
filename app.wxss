@@ -30,7 +30,9 @@
   font-size: 32rpx;
   display: flex;
 }
-
+.hide {
+  display: none;
+}
 .img {
   width: 50rpx;
   height: 50rpx;

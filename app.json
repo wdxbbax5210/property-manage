@@ -6,7 +6,9 @@
     "pages/feeSearchResult/feeSearchResult",
     "pages/approveList/approvelist",
     "pages/feeEntry/feeEntry",
-    "pages/my/infoApprove/infoApprove"
+    "pages/my/infoApprove/infoApprove",
+    "pages/register/register",
+    "pages/feeList/feeList"
   ],
   "window": {
     "backgroundTextStyle": "light",
