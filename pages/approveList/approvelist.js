@@ -25,7 +25,7 @@ Page({
   onLoad: function (options) {
     util.setTitle("用户审核");
     this.getUser();
-    console.log(this.data.userInfo)
+    console.log(this.data.userInfo,"this.data.userInfo")
   },
   getUser: function(){
     let userType = this.data.userInfo.data.userType;
@@ -46,11 +46,11 @@ Page({
       phoneNumber: "" //手机号码
     }
     console.log(params)
-    wx.request({
-      url: 'http://www.miss-xia-property-manage.club:8080/user/list',
-      data: params,
+    util.NetRequest({
+      url: '/user/list',
+      params: params,
       success: (data) => {
-        console.log(data,"用户列表")
+        console.log(data, "用户列表")
       }
     })
   },
@@ -62,11 +62,11 @@ Page({
       userType: it.userType
     }
     console.log(params)
-    wx.request({
-      url: 'http://www.miss-xia-property-manage.club:8080/user/verify',
-      data: params,
-      success: (data) => {
-        console.log(data, "用户列表")
+    util.NetRequest({
+      url: '/user/verify',
+      params: params,
+      success: (data) =>{
+        console.log(data, "用户verify")
       }
     })
   },

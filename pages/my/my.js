@@ -8,7 +8,8 @@ Page({
   data: {
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     logged: false, //是否登录
-    userInfo: wx.getStorageSync("userInfo")
+    userInfo: wx.getStorageSync("userInfo"),
+    showRegister: false, //是否显示点击注册的按钮
   },
   
   /**
@@ -17,8 +18,22 @@ Page({
   onLoad: function (options) {
     util.setTitle("我的");
     console.log(this.data.userInfo.data)
+    wx.getSetting({
+      success: function (res) {
+        console.log(res)
+        if (!res.authSetting['scope.userInfo']){
+          this.setData({
+            showRegister: true
+          })
+        }
+      }
+    })
   },
-  
+  goToRegitser: function(){
+    wx.navigateTo({
+      url: '../register/register',
+    })
+  },
   getMyApprove: function(){
     wx.navigateTo({
       url: 'infoApprove/infoApprove',

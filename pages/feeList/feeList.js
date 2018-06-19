@@ -32,9 +32,9 @@ Page({
     let params = {
       itemName:"" //非必填 
     }
-    wx.request({
-      url: 'http://www.miss-xia-property-manage.club:8080/fee/item/list',
-      data: params,
+    util.NetRequest({
+      url: '/fee/item/list',
+      params: params,
       success: (data) => {
         console.log(data, "收费项目列表")
       }
@@ -44,12 +44,13 @@ Page({
     let params = {
       itemName: "" //必填 
     }
-    wx.request({
-      url: 'http://www.miss-xia-property-manage.club:8080/fee/item/add',
-      data: params,
+    let t = this;
+    util.NetRequest({
+      url: "/fee/item/add",
+      params: params,
       success: (data) => {
         console.log(data, "新增收费项目")
-        this.getFeeList()
+        t.getFeeList()
       }
     })
   },
@@ -62,9 +63,9 @@ Page({
       itemName: "", //必填 
       itemId:"", //项目Id 必填
     }
-    wx.request({
-      url: 'http://www.miss-xia-property-manage.club:8080/fee/item/upd',
-      data: params,
+    util.NetRequest({
+      url: '/fee/item/upd',
+      params: params,
       success: (data) => {
         console.log(data, "更新收费项目")
         this.getFeeList()
@@ -75,12 +76,13 @@ Page({
     let params = {
       itemId: "", //项目Id 必填
     }
-    wx.request({
-      url: 'http://www.miss-xia-property-manage.club:8080/fee/item/del',
-      data: params,
+    let t = this;
+    util.NetRequest({
+      url: "/fee/item/del",
+      params: params,
       success: (data) => {
         console.log(data, "删除收费项目")
-        this.getFeeList()
+        t.getFeeList()
       }
     })
   },

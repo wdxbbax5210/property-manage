@@ -1,13 +1,17 @@
 <!--pages/my/my.wxml-->
 <view class="my main">
   <view class="myHeader">
-    <view class="userinfo">
-      <open-data type="userAvatarUrl" class="userinfo-avatar"></open-data> 
+    <view wx:if="{{!showRegister}}" class="t-FBH">
+      <view class="userinfo">
+          <open-data type="userAvatarUrl" class="userinfo-avatar"></open-data> 
+        </view>
+        <view class="userName t-FBH"> 
+          <open-data type="userNickName"></open-data>
+          <!-- {{showRegister ? '': 'hide'}} -->
+        </view>
     </view>
-    <view class="userName t-FBH"> 
-      <open-data type="userNickName"></open-data>
-      <!-- {{ifShow ? '': 'hide'}} -->
-      
+    <view wx:else class="register-btn">
+      <button class='register' bindtap='goToRegitser'>点击注册</button>
     </view>
   </view>
   <!-- <view class="wrap-common">

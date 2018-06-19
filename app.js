@@ -12,6 +12,7 @@ App(Provider(configureStore())({
   },
   globalData: {
     userInfo: null,
-    header: { 'Cookie': '' } //这里还可以加入其它需要的请求头，比如'x-requested-with': 'XMLHttpRequest'表示ajax提交，微信的请求时不会带上这个的
+    header: { 'Cookie': '' }, //这里还可以加入其它需要的请求头，比如'x-requested-with': 'XMLHttpRequest'表示ajax提交，微信的请求时不会带上这个的
+    origin: 'https://229492634.miss-xia-property-manage.club'
   }
 }))

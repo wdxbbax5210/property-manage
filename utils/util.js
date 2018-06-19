@@ -37,11 +37,22 @@ const getUserInfo = ()=>{
   })
   return user;
 }
-
+const NetRequest = ({ url, params, success}) => {
+  console.log(getApp().globalData.origin + url)
+  wx.request({
+    url: getApp().globalData.origin + url,
+    data: params,
+    method: 'POST',
+    success: (data) => {
+      success && success(data)
+    }
+  })
+}
 module.exports = {
   formatTime: formatTime,
   setTitle: setTitle,
   showLoading: showLoading,
   hideLoading: hideLoading,
   getUserInfo: getUserInfo,
+  NetRequest: NetRequest
 }

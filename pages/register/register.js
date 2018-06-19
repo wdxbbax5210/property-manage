@@ -21,9 +21,6 @@ Page({
     wx.getSetting({
       success: function (res) {
         console.log(res)
-        // if (res.authSetting['scope.userInfo']) {
-          
-        // }
       }
     })
   },
@@ -56,7 +53,6 @@ Page({
               //
               let dialogComponent = t.selectComponent('.wxc-dialog')
               dialogComponent && dialogComponent.show();
-              
             }
           })
         } else {

@@ -28,6 +28,7 @@ Page({
             data: {
               code: res.code
             },
+            method: 'POST',
             success: ()=>{
               wx.switchTab({
                 url: '../home/home'
