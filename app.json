@@ -22,9 +22,9 @@
     "list": [
       {
         "pagePath": "pages/home/home",
-        "text": "首页",
-        "iconPath": "images/home.png",
-        "selectedIconPath": "images/home_selected.png"
+        "text": "工作台",
+        "iconPath": "images/work.png",
+        "selectedIconPath": "images/work_selected.png"
       },
       {
         "pagePath": "pages/my/my",
