@@ -24,6 +24,17 @@ Page({
       }
     })
   },
+  onPhoneChange(e){ 
+    console.log(e)
+    this.setData({
+      phoneNumber: e.detail.value
+    })
+  },
+  onUnitChange(e){
+    this.setData({
+      unitNumber: e.detail.value
+    })
+  },
   onGetUserInfo: function (e) {
     let t = this;
     let userInfo = e.detail.userInfo;
@@ -32,36 +43,38 @@ Page({
     t.login(userInfo)
   },
   login: function (userInfo) {
-    console.log(userInfo)
     if (this.data.logged) return
+    userInfo.openId = getApp().globalData.openId;
+    userInfo.sessionKey = getApp().globalData.sessionKey;
+    userInfo.unitNumber = this.data.unitNumber;
+    userInfo.phoneNumber = this.data.phoneNumber;
     let t = this;
-    wx.login({
-      success: function (res) {
-        if (res.code) {
-          //发起网络请求
-          wx.request({
-            url: 'https://229492634.miss-xia-property-manage.club/user/login',
-            header: header,
-            method: "POST",
-            data: {
-              code: res.code,
-              userInfo: userInfo
+    // wx.login({
+    //   success: function (res) {
+    //     if (res.code) {
+    //       console.log(res)
+          util.NetRequest({
+            url: '/user/login',
+            params: {
+              // code: res.code,
+              userInfo: userInfo,
+              // openId: getApp().globalData.openId,
+              // sessionKey: getApp().globalData.sessionKey
             },
             success: (data) => {
-              console.log(data)
               let userInfo = data.data.data;
               getApp().globalData.header.Cookie = 'JSESSIONID=' + userInfo.sessionId;
-              getApp().globalData.requestId = userInfo.openId;
-              wx.setStorageSync("userInfo", data.data)
+              // getApp().globalData.requestId = userInfo.openId;
+              wx.setStorageSync("userInfo", userInfo)
               let dialogComponent = t.selectComponent('.wxc-dialog')
               dialogComponent && dialogComponent.show();
             }
           })
-        } else {
-          console.log('登录失败！' + res.errMsg)
-        }
-      }
-    });
+      //   } else {
+      //     console.log('登录失败！' + res.errMsg)
+      //   }
+      // }
+    // });
   },
   onConfirm() {
     let dialogComponent = this.selectComponent('.wxc-dialog')

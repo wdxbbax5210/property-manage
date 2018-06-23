@@ -57,3 +57,19 @@
   line-height: 68rpx;
   text-align: center;
 }
+.no-data {
+  text-align: center;
+  font-size: 24rpx;
+  margin-top: 30rpx;
+  color: #999;
+}
+.btn-add {
+  margin: 0 30rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  font-size: 28rpx;
+  position: fixed;
+  bottom:20rpx;
+  left: 0;
+  right: 0;
+}

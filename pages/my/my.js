@@ -8,7 +8,7 @@ Page({
   data: {
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     logged: false, //是否登录
-    userInfo: wx.getStorageSync("userInfo"),
+    userInfo: wx.getStorageSync("userInfo").data,
     showRegister: false, //是否显示点击注册的按钮
   },
   
@@ -17,21 +17,7 @@ Page({
    */
   onLoad: function (options) {
     util.setTitle("我的");
-    console.log(header)
-    console.log(this.data.userInfo.data,"userInfo")
-    wx.getSetting({
-      success: function (res) {
-        console.log(res)
-        if (!res.authSetting['scope.userInfo']){
-          this.setData({
-            showRegister: true
-          })
-        }else{
-          getApp().globalData.header.Cookie = 'JSESSIONID=' + res.sessionId;
-          wx.setStorageSync("userInfo", res)
-        }
-      }
-    })
+    // console.log(wx.getStorageSync("userInfo").data,"userInfo")
   },
   goToRegitser: function(){
     wx.navigateTo({
@@ -53,7 +39,6 @@ Page({
       fail: function(res) {},
       complete: function(res) {},
     })
-    console.log("获取审批列表")
   },
   goToFeeEntry: function(){
     wx.navigateTo({

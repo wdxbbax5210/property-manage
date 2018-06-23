@@ -17,7 +17,7 @@
   <!-- <view class="wrap-common">
   </view> -->
   <view class="wrap-common">
-    <view class="item {{(userInfo.data.userType == 0 || userInfo.data.userType == 1) ? '' : 'hide'}}" bindtap='getApproveList'>
+    <view class="item {{(userInfo.userType == 0 || userInfo.userType == 1) ? 'hide' : ''}}" bindtap='getApproveList'>
       <view class="title">用户信息审核</view>
       <image class="img" src="../../images/arrow-right.png"></image>
     </view>

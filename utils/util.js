@@ -50,11 +50,24 @@ const NetRequest = ({ url, params, success}) => {
     }
   })
 }
+/**
+ * 检查对象是否为空
+ * @param {*} obj
+ */
+const isEmptyObj = obj => {
+  for (const i in obj) {
+    if (Object.prototype.hasOwnProperty.call(obj, i)) {
+      return false;
+    }
+  }
+  return true;
+};
 module.exports = {
   formatTime: formatTime,
   setTitle: setTitle,
   showLoading: showLoading,
   hideLoading: hideLoading,
   getUserInfo: getUserInfo,
-  NetRequest: NetRequest
+  NetRequest: NetRequest,
+  isEmptyObj: isEmptyObj
 }

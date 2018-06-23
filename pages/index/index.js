@@ -25,6 +25,13 @@ Page({
     autoplay: true,
     interval: 5000,
     duration: 1000,
+    userInfo: null,
+    ifHaveRight: false, //当前用户身份是否在员工及以上
+  },
+  goQueryOperate: function(){
+    wx.navigateTo({
+      url: '../home/home?operateRight=1',
+    })
   },
   goQuery: function (){
     wx.navigateTo({
@@ -42,21 +49,67 @@ Page({
   onLoad: function (options) {
     util.setTitle("工作台");
     let t = this;
-    wx.getSetting({
+    wx.login({
       success: function (res) {
-        //已经授权 
-        if (!res.authSetting['scope.userInfo']) {
-          //从cookie中获取用户信息 给后台
-          console.log(wx.getStorageSync("userInfo").data)
-          let userInfo = wx.getStorageSync("userInfo").data;
-          getApp().globalData.header.Cookie = 'JSESSIONID=' + userInfo.sessionId;
-          getApp().globalData.requestId = userInfo.openId;
+        console.log(res)
+        util.hideLoading()
+        if (res.code) {
+          //调用/login/check 检查用户是否注册过
+          let params = {
+            code: res.code //必填 
+          }
+          util.NetRequest({
+            url: '/user/login/check',
+            params: params,
+            success: (data) => {
+              let userInfo = data.data.data.userInfo;
+              if (userInfo && !util.isEmptyObj(userInfo)){ //注册过
+                console.log(userInfo.sessionId)
+                getApp().globalData.header.Cookie = 'JSESSIONID=' + userInfo.sessionId;
+                let ifHaveRight = false;
+                //当前用户不是未知身份 且不是普通用户
+                if (userInfo.userType != "0" && userInfo.userType != "1"){
+                  ifHaveRight = true
+                }
+                t.setData({
+                  userInfo: userInfo,
+                  ifHaveRight: ifHaveRight
+                })
+                if (userInfo.userType == "0"){ //当前用户身份未知时跳转到等待页面
+                  wx.reLaunch({
+                    url: '../noAccess/noAccess'
+                  })
+                }
+              } else {//没有授权 引导用户授权登录
+                getApp().globalData.openId = data.data.data.openId;
+                getApp().globalData.sessionKey = data.data.data.sessionKey;
+                t.showDialog();
+              }
+              console.log(data, "校验是否注册过")
+            }
+          })
         } else {
-          //没有授权 引导用户授权
-          t.showDialog()
+          console.log('登录失败！' + res.errMsg)
         }
       }
-    })
+    });
+    
+    // wx.getSetting({
+    //   success: function (res) {
+    //     console.log(res)
+        //已经授权 
+        // if (res.authSetting['scope.userInfo']) {
+        //   //从cookie中获取用户信息 给后台
+        //   console.log(wx.getStorageSync("userInfo").data,"已经授权的处理")
+        //   let userInfo = wx.getStorageSync("userInfo").data;
+        //   getApp().globalData.header.Cookie = 'JSESSIONID=' + userInfo.sessionId;
+        //   getApp().globalData.requestId = userInfo.openId;
+        // } else {
+        //   //没有授权 引导用户授权
+        //   t.showDialog()
+        // }
+      // }
+    // })
   },
   showDialog(){
     let dialogComponent = this.selectComponent('.wxc-dialog')

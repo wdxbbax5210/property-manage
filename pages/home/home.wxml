@@ -39,6 +39,7 @@
     </view>
   </view> -->
   <wxc-tab
+    wx:if="{{tabs.length}}"
     bind:tabchange="onClick"
     default-index="{{0}}"
     component-id="c2"
@@ -51,10 +52,10 @@
     <wxc-tab-panel
       wx:for="{{tabs}}"
       wx:for-item="tab"
-      wx:key="{{tab.content}}"
+      wx:key="{{tab.itemId}}"
       tab-index="{{index}}"
       component-id="c2"
-      label="{{tab.title}}"
+      label="{{tab.itemName}}"
     >
       <view class="filter t-FBH">
         <view class="filterItem t-FB1">
@@ -74,7 +75,15 @@
           </picker>
         </view>
       </view>
-      <scroll-view scroll-y style="height: auto;" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
+      <scroll-view 
+        scroll-y 
+        style="height: auto; margin-bottom: 118rpx" 
+        bindscrolltoupper="upper" 
+        bindscrolltolower="lower" 
+        bindscroll="scroll" 
+        scroll-into-view="{{toView}}" 
+        scroll-top="{{scrollTop}}"
+        >
         <view class="scroll-view-head scroll-view-item t-FBH">
           <view class="t-FB1">单元编号</view>
           <view class="t-FB1">收费项目</view>
@@ -84,17 +93,30 @@
           <view class="t-FB1">缴费状态</view>
         </view>
         <view wx:for="{{list}}"  wx:for-index="index" wx:key="index">
-          <view class="scroll-view-item t-FBH">
-            <view class="t-FB1">301</view>
-            <view class="t-FB1">电费</view>
-            <view class="t-FB1">2018年6月</view>
-            <view class="t-FB1">12700</view>
-            <view class="t-FB1">2018年8月</view>
-            <view class="t-FB1">未缴费</view>
-          </view>
+          <picker bindchange="bindhandleChange" range="{{status}}" wx:if="{{operateRight}}" data-id="{{100}}" data-amount="{{200}}">
+            <view class="scroll-view-item t-FBH">
+              <view class="t-FB1">301</view>
+              <view class="t-FB1">电费</view>
+              <view class="t-FB1">2018年6月</view>
+              <view class="t-FB1">12700</view>
+              <view class="t-FB1">2018年8月</view>
+              <view class="t-FB1">未缴费</view>
+            </view>
+          </picker>
+          <view class="scroll-view-item t-FBH" wx:else>
+              <view class="t-FB1">401</view>
+              <view class="t-FB1">水费</view>
+              <view class="t-FB1">2018年6月</view>
+              <view class="t-FB1">12700</view>
+              <view class="t-FB1">2018年8月</view>
+              <view class="t-FB1">未缴费</view>
+            </view>
         </view>
       </scroll-view>
+      <button class="btn-add t-FB1 " type='default' bindtap='onAddRecord' data-id="{{100}}" data-amount="{{200}}">新增记录</button>
     </wxc-tab-panel>
   </wxc-tab>
- 
+  <view wx:else class="no-data">
+    暂时没有收费项目
+  </view>
 </view>

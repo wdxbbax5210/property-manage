@@ -7,7 +7,10 @@
     "pages/approveList/approvelist",
     "pages/feeEntry/feeEntry",
     "pages/register/register",
-    "pages/feeList/feeList"
+    "pages/feeList/feeList",
+    "pages/noAccess/noAccess",
+    "pages/record/record",
+    "pages/addFeeRecord/addFeeRecord"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -23,9 +26,9 @@
     "list": [
       {
         "pagePath": "pages/index/index",
-        "text": "工作台",
-        "iconPath": "images/work.png",
-        "selectedIconPath": "images/work_selected.png"
+        "text": "首页",
+        "iconPath": "images/home.png",
+        "selectedIconPath": "images/home_selected.png"
       },
       {
         "pagePath": "pages/my/my",

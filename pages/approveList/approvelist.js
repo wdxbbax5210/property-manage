@@ -6,42 +6,31 @@ Page({
    * 页面的初始数据
    */
   data: {
-    activeTab: 0, //默认显示待审核列表
-    list: [{ id: 1, userType: "NORMAL" }, { id: 2, userType: "NORMAL"}],
-    userType:"" , //用户类型
+    list: [{ id: 1, userName: "测试名字1", userType: "0" }, { id: 2, userName: "测试名字2",userType: "1"}],
+    userType: 0, //用户类型  0未审核 1普通用户 7普通员工  8管理员 9超级管理员 默认显示待审核列表
     userInfo: wx.getStorageSync("userInfo")
   },
   onChangeTab(event){
     let tab = event.target.dataset.active;
     this.setData({
-      activeTab: tab,
-      // list: tab == "1" ? [1,2,3] : tab == "7" ? [1] : [1,2,3,4,5]
+      userType: tab,
+    },()=>{
+      this.queryUserList();
     })
-    this.queryUserList(dataMap.userIdentity[tab].type)
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     util.setTitle("用户审核");
-    this.getUser();
-    console.log(this.data.userInfo,"this.data.userInfo")
+    // this.getUser();
+    console.log(this.data.userInfo.userType,"我的身份")
+    this.queryUserList(); 
   },
-  getUser: function(){
-    let userType = this.data.userInfo.data.userType;
-    let type;
-    if (userType){
-      this.setData({
-        userType: dataMap.userIdentity[userType]
-      })
-      type = dataMap.userIdentity[userType].type;
-      this.queryUserList(type);
-    }
-  },
-  queryUserList: function (userType){
+  queryUserList: function (){
     let params = {
-      userType: userType, //用户类型
-      nickName: this.data.userInfo.data.nickName || '',  //昵称
+      userType: this.data.userType, //查询的用户类型列表
+      nickName: this.data.userInfo.nickName || '',  //昵称
       unitNumber: "", //单元编号
       phoneNumber: "" //手机号码
     }
@@ -54,8 +43,11 @@ Page({
       }
     })
   },
+  /**
+   * 设置用户身份
+   */
   userVerify: function(event){
-    console.log(event.target.dataset.item)
+    console.log(event.target.dataset.item,"要给用户设置的身份")
     let it = event.target.dataset.item;
     let params = {
       userId: it.id,
