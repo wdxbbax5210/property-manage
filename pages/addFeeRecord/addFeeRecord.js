@@ -1,6 +1,6 @@
 // pages/addFeeRecord/addFeeRecord.js
 Page({
-  //新增或编辑某个收费项目下的收费记录
+  // 新增或编辑某个收费项目下的收费记录
   /**
    * 页面的初始数据
    */

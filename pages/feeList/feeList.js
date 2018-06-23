@@ -10,8 +10,8 @@ Page({
       {id:"1",title:"电费测试1"},
       {id:"2",title:"电费测试2"}
     ],
-    itemName:"",
-    itemId:"", //编辑的id
+    itemName: null,
+    itemId: null, //编辑的id
   },
 
   /**
@@ -43,13 +43,16 @@ Page({
   },
   getFeeList: function(){
     let params = {
-      itemName:"" //非必填 
+      itemName: this.data.itemName //非必填 
     }
     util.NetRequest({
       url: '/fee/item/list',
       params: params,
       success: (data) => {
         console.log(data, "收费项目列表")
+        //TODO this.setData({
+        //   feeList: data.list
+        // })
       }
     })
   },
