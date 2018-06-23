@@ -1,0 +1,29 @@
+<!--pages/index/index.wxml-->
+<swiper indicator-dots="{{indicatorDots}}"  
+          autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">  
+        <block wx:for="{{imgUrls}}"  wx:key="{{key}}">  
+          <swiper-item>  
+            <navigator url="{{item.link}}" hover-class="navigator-hover">  
+              <image src="{{item.url}}" class="slide-image" width="355" height="150"/>  
+            </navigator>   
+          </swiper-item>  
+        </block>  
+</swiper> 
+<view class="fee">
+    <view class="iconPart t-FB1" bindtap="goQuery">
+      <image src="../../images/query.png"></image>
+      <view>查询费用</view>
+    </view>
+    <view class="iconPart t-FB1">
+      <image src="../../images/dianfee.png"></image>
+      <view>录入费用</view>
+    </view>
+    <view class="iconPart t-FB1" bindtap='goToFeeList'>
+      <image src="../../images/waterfee.png"></image>
+      <view>收费项目管理</view>
+    </view>
+    <view class="iconPart t-FB1">
+      <image src="../../images/ranqifee.png"></image>
+      <view>哈哈</view>
+    </view>
+  </view>

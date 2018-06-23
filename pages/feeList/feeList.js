@@ -6,8 +6,12 @@ Page({
    * 页面的初始数据
    */
   data: {
-    feeList:[1,2],
-    itemName:""
+    feeList:[
+      {id:"1",title:"电费测试1"},
+      {id:"2",title:"电费测试2"}
+    ],
+    itemName:"",
+    itemId:"", //编辑的id
   },
 
   /**
@@ -22,8 +26,17 @@ Page({
     let dialogComponent = t.selectComponent('.wxc-dialog')
     dialogComponent && dialogComponent.show();
   },
+  Edit: function(event){
+    let t = this;
+    this.setData({
+      itemName: event.target.dataset.name,
+      itemId: event.target.dataset.id
+    },()=>{
+      let dialogComponent = t.selectComponent('.wxc-dialog')
+      dialogComponent && dialogComponent.show();
+    })
+  },
   OnNameChange: function(event){
-    console.log(event.detail.value)
     this.setData({
       itemName: event.detail.value
     })
@@ -42,8 +55,9 @@ Page({
   },
   feeItemAdd: function(){
     let params = {
-      itemName: "" //必填 
+      itemName: this.data.itemName //必填 
     }
+    console.log("新增")
     let t = this;
     util.NetRequest({
       url: "/fee/item/add",
@@ -54,15 +68,25 @@ Page({
       }
     })
   },
+  onConfirm: function(event){
+    if(this.data.itemId){
+      this.feeItemUpdate(event.target.dataset.id);
+    }else{
+      this.feeItemAdd();
+    }
+    let dialogComponent = this.selectComponent('.wxc-dialog')
+    dialogComponent && dialogComponent.hide();
+  },
   onCancel: function(){
     let dialogComponent = this.selectComponent('.wxc-dialog')
     dialogComponent && dialogComponent.hide();
   },
-  feeItemUpdate: function(){
+  feeItemUpdate: function(id){
     let params = {
-      itemName: "", //必填 
-      itemId:"", //项目Id 必填
+      itemName: this.data.itemName, //必填 
+      itemId: id, //项目Id 必填
     }
+    console.log("编辑" + params)
     util.NetRequest({
       url: '/fee/item/upd',
       params: params,
@@ -72,9 +96,9 @@ Page({
       }
     })
   },
-  feeItemDel: function(){
+  feeItemDel: function (event){
     let params = {
-      itemId: "", //项目Id 必填
+      itemId: event.target.dataset.id, //项目Id 必填
     }
     let t = this;
     util.NetRequest({

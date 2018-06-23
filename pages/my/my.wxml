@@ -25,10 +25,6 @@
       <view class="title">费用录入</view>
       <image class="img" src="../../images/arrow-right.png"></image>
     </view> -->
-    <view class="item" bindtap='goToFeeList'>
-      <view class="title">收费项目列表</view>
-      <image class="img" src="../../images/arrow-right.png"></image>
-    </view>
   </view>
 </view>
 

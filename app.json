@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/index/index",
     "pages/home/home",
     "pages/my/my",
     "pages/logs/logs",
@@ -21,7 +22,7 @@
     "position": "bottom",
     "list": [
       {
-        "pagePath": "pages/home/home",
+        "pagePath": "pages/index/index",
         "text": "工作台",
         "iconPath": "images/work.png",
         "selectedIconPath": "images/work_selected.png"
