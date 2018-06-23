@@ -2,11 +2,11 @@
   <scroll-view scroll-y style="height: auto;" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
     <view class="feeList">
       <view class="feeItem t-FBH"  wx:for="{{feeList}}"  wx:for-index="index" wx:key="index">
-        <view class="feeTitle t-FB1">{{item.title}}</view>
+        <view class="feeTitle t-FB1">{{item.itemName}}</view>
         <view 
           class="btn" 
           bindtap='Edit' 
-          data-name="{{item.title}}" 
+          data-name="{{item.itemName}}" 
           data-id="{{item.id}}"
         >
         编辑

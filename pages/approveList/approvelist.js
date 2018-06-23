@@ -30,9 +30,9 @@ Page({
   queryUserList: function (){
     let params = {
       userType: this.data.userType, //查询的用户类型列表
-      nickName: this.data.userInfo.nickName || '',  //昵称
-      unitNumber: "", //单元编号
-      phoneNumber: "" //手机号码
+      nickName:  null,  //昵称
+      unitNumber: null, //单元编号
+      phoneNumber: null //手机号码
     }
     console.log(params)
     util.NetRequest({

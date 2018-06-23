@@ -59,7 +59,11 @@
     >
       <view class="filter t-FBH">
         <view class="filterItem t-FB1">
-          <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+          <picker 
+            bindchange="bindPickerChange" 
+            value="{{index}}" 
+            range="{{array}}"
+            >
             <view class="picker">
               <text>{{array[selected]}}</text>
               <image src="../../images/arrow-down.png"></image>
@@ -67,7 +71,13 @@
           </picker>
         </view>
         <view class="filterItem t-FB1">
-          <picker mode="date" value="{{date}}" fields="month" start="2015-09"  bindchange="bindDateChange">
+          <picker 
+            mode="date" 
+            value="{{date}}" 
+            fields="month" 
+            start="2015-09"  
+            bindchange="bindDateChange"
+            >
             <view class="picker">
               <text>{{date?date: "全部"}}</text>
               <image src="../../images/arrow-down.png"></image>
@@ -92,10 +102,22 @@
           <view class="t-FB1">开票月份</view>
           <view class="t-FB1">缴费状态</view>
         </view>
-        <view wx:for="{{list}}"  wx:for-index="index" wx:key="index">
-          <picker bindchange="bindhandleChange" range="{{status}}" wx:if="{{operateRight}}" data-id="{{100}}" data-amount="{{200}}">
+        <view 
+          wx:for="{{list}}"  
+          wx:for-index="index" 
+          wx:for-item="item"
+          wx:key="{{item.id}}"
+          wx:if="{{list.length}}"
+          >
+          <picker 
+            bindchange="bindhandleChange" 
+            range="{{status}}" 
+            wx:if="{{operateRight}}" 
+            data-id="{{100}}" 
+            data-amount="{{200}}"
+            >
             <view class="scroll-view-item t-FBH">
-              <view class="t-FB1">301</view>
+              <view class="t-FB1">{{item.id}}</view>
               <view class="t-FB1">电费</view>
               <view class="t-FB1">2018年6月</view>
               <view class="t-FB1">12700</view>
@@ -104,7 +126,7 @@
             </view>
           </picker>
           <view class="scroll-view-item t-FBH" wx:else>
-              <view class="t-FB1">401</view>
+              <view class="t-FB1">{{item.id}}</view>
               <view class="t-FB1">水费</view>
               <view class="t-FB1">2018年6月</view>
               <view class="t-FB1">12700</view>
@@ -112,8 +134,20 @@
               <view class="t-FB1">未缴费</view>
             </view>
         </view>
+        <view class="no-data" wx:if="{{list.length == 0}}">
+          暂时没有收费记录
+        </view>
       </scroll-view>
-      <button class="btn-add t-FB1 " type='default' bindtap='onAddRecord' data-id="{{100}}" data-amount="{{200}}">新增记录</button>
+      <button 
+        class="btn-add t-FB1 " 
+        type='default' 
+        bindtap='onAddRecord' 
+        data-id="{{100}}" 
+        data-amount="{{200}}"
+        wx:if="{{operateRight}}" 
+        >
+        新增记录
+        </button>
     </wxc-tab-panel>
   </wxc-tab>
   <view wx:else class="no-data">

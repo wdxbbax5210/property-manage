@@ -1,2 +1,41 @@
 <!--pages/addFeeRecord/addFeeRecord.wxml-->
-<text>pages/addFeeRecord/addFeeRecord.wxml</text>
+<view class=" main">
+  <view class="section">
+    <view class="item " >
+      <view class="title">缴费金额</view>
+      <input 
+        type="text" 
+        class="input" 
+        placeholder='输入缴费金额(必填)' 
+        value="{{amount}}" 
+        bindinput='onAmountChange'
+        />
+    </view>
+    <picker 
+      mode="date" 
+      value="{{date}}" 
+      fields="month" 
+      start="2015-09"  
+      bindchange="onDateChange"
+      >
+      <view class="item " >
+        <view class="title">
+          所属月份
+        </view>
+        <view>{{date}}</view>
+        <image class="img" src="../../images/arrow-right.png"></image>
+      </view>
+    </picker>
+  </view>
+   <button 
+    class="btn-login t-FB1 " 
+    type='primary' 
+    bindtap="onConfirm"
+    >
+    保存
+    </button>
+    <wxc-toast
+    is-show="{{$toast.show}}"
+    text="请输入金额或日期"></wxc-toast>
+</view>
+

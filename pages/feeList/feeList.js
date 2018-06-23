@@ -1,17 +1,18 @@
 // pages/feeList/feeList.js
 import util from "../../utils/util.js";
 Page({
-
   /**
    * 页面的初始数据
    */
   data: {
     feeList:[
-      {id:"1",title:"电费测试1"},
-      {id:"2",title:"电费测试2"}
+      // {id:"1",itemName:"电费测试1"},
+      // {id:"2",itemName:"电费测试2"}
     ],
     itemName: null,
     itemId: null, //编辑的id
+    page: 1,
+    pageSize: 99,
   },
 
   /**
@@ -36,23 +37,25 @@ Page({
       dialogComponent && dialogComponent.show();
     })
   },
-  OnNameChange: function(event){
+  OnNameChange(event){
     this.setData({
       itemName: event.detail.value
     })
   },
-  getFeeList: function(){
+  getFeeList(){
     let params = {
-      itemName: this.data.itemName //非必填 
+      itemName: this.data.itemName, //非必填 
+      page: this.data.page,
+      pageSize: this.data.pageSize
     }
+    let t = this;
     util.NetRequest({
       url: '/fee/item/list',
       params: params,
-      success: (data) => {
-        console.log(data, "收费项目列表")
-        //TODO this.setData({
-        //   feeList: data.list
-        // })
+      success: (res) => {
+        t.setData({
+          feeList: res.list
+        })
       }
     })
   },
@@ -67,13 +70,18 @@ Page({
       params: params,
       success: (data) => {
         console.log(data, "新增收费项目")
-        t.getFeeList()
+        t.setData({
+          itemName: null,
+          itemId: null
+        },()=>{
+          t.getFeeList()
+        })
       }
     })
   },
-  onConfirm: function(event){
+  onConfirm: function(){
     if(this.data.itemId){
-      this.feeItemUpdate(event.target.dataset.id);
+      this.feeItemUpdate();
     }else{
       this.feeItemAdd();
     }
@@ -84,18 +92,24 @@ Page({
     let dialogComponent = this.selectComponent('.wxc-dialog')
     dialogComponent && dialogComponent.hide();
   },
-  feeItemUpdate: function(id){
+  feeItemUpdate: function(){
+    let t = this;
     let params = {
       itemName: this.data.itemName, //必填 
-      itemId: id, //项目Id 必填
+      itemId: this.data.itemId, //项目Id 必填
     }
-    console.log("编辑" + params)
+    console.log("编辑")
     util.NetRequest({
       url: '/fee/item/upd',
       params: params,
       success: (data) => {
         console.log(data, "更新收费项目")
-        this.getFeeList()
+        t.setData({
+          itemName: null,
+          itemId: null
+        },()=>{
+          t.getFeeList()
+        })
       }
     })
   },

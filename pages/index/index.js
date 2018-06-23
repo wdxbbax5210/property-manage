@@ -11,15 +11,16 @@ Page({
         link: '/pages/index/index',
         url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
         key: 1
-      }, {
-        link: '/pages/logs/logs',
-        url: 'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
-        key: 2
-      }, {
-        link: '/pages/test/test',
-        url: 'http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg',
-        key: 3
       }
+      // , {
+      //   link: '/pages/logs/logs',
+      //   url: 'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
+      //   key: 2
+      // }, {
+      //   link: '/pages/test/test',
+      //   url: 'http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg',
+      //   key: 3
+      // }
     ],
     indicatorDots: true,
     autoplay: true,
@@ -47,7 +48,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    util.setTitle("工作台");
+    util.setTitle("首页");
     let t = this;
     wx.login({
       success: function (res) {
@@ -61,8 +62,8 @@ Page({
           util.NetRequest({
             url: '/user/login/check',
             params: params,
-            success: (data) => {
-              let userInfo = data.data.data.userInfo;
+            success: (res) => {
+              let userInfo = res.userInfo;
               if (userInfo && !util.isEmptyObj(userInfo)){ //注册过
                 console.log(userInfo.sessionId)
                 getApp().globalData.header.Cookie = 'JSESSIONID=' + userInfo.sessionId;
@@ -81,11 +82,11 @@ Page({
                   })
                 }
               } else {//没有授权 引导用户授权登录
-                getApp().globalData.openId = data.data.data.openId;
-                getApp().globalData.sessionKey = data.data.data.sessionKey;
+                getApp().globalData.openId = res.openId;
+                getApp().globalData.sessionKey = res.sessionKey;
                 t.showDialog();
               }
-              console.log(data, "校验是否注册过")
+              console.log(res, "校验是否注册过")
             }
           })
         } else {

@@ -12,10 +12,13 @@ Page({
     index: 0,
     array: ['全部', '已缴费', '未缴费'],
     date: '',
-    list: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15],
+    list: [],
     operateRight: null,
-    status: ["标记为已缴费","标记为已开票","删除该记录"],
-    selectedStatus: 0
+    status: ["已缴费","已开票","删除","编辑"],
+    selectedStatus: 0,
+    page: 1,
+    pageSize: 10,
+    count: 0, 
   },
   /**
    * 切换月份
@@ -113,22 +116,20 @@ Page({
    */
   getFeeList(){
     let params = {
-      itemName: "" //非必填 
+      itemName: null, //非必填
+      page: 1,
+      pageSize: 99 
     }
     util.NetRequest({
       url: '/fee/item/list',
       params: params,
-      success: (data) => {
-        console.log(data)
+      success: (res) => {
         this.setData({
-          tabs:[
-            { itemName: '电费', content: '内容二', itemId: 2 },
-            { itemName: '水费', content: '内容三', itemId: 3 },
-          ],
+          tabs: res.list,
         },()=>{
           this.onQueryDetailList()
         })
-        console.log(data, "收费项目列表")
+        console.log(res, "收费项目列表")
       }
     })
   },
@@ -136,7 +137,6 @@ Page({
    * 查询对应收费项目的详情列表 赋值给list
    */
   onQueryDetailList(){
-    console.log(this.data.userInfo,"userInfo")
     let t = this, { tabs, selected, userInfo, date, index, array} = t.data;
     let url = "/fee/record/owner/list";
     if(this.data.operateRight == 1){
@@ -145,21 +145,24 @@ Page({
     util.NetRequest({
       url:url,
       params:{
-        itemName: tabs[index].itemName,
-        nickName: userInfo.nickName,
-        unitNumber: userInfo.unitNumber || "",
-        phoneNumber: userInfo.phoneNumber,
-        theMonth: date,
-        payStatus: selected == 0 ? "" : selected == 1 ? "1" : "0",
-        payTimeFrom: "", //缴费时间
-        payTimeTo: "", 
-        ticketTimeFrom: "", //开票时间
-        ticketTimeTo: ""
+        itemName: tabs[index].itemName || null,
+        nickName: userInfo.nickName || null,
+        unitNumber: userInfo.unitNumber || null,
+        phoneNumber: userInfo.phoneNumber || null,
+        theMonth: date || null,
+        payStatus: selected == 0 ? null : selected == 1 ? "1" : "0",
+        payTimeFrom: null, //缴费时间
+        payTimeTo: null, 
+        ticketTimeFrom: null, //开票时间
+        ticketTimeTo: null,
+        page: this.data.page,
+        pageSize: this.data.pageSize
       },
-      success: (data) => {
-        console.log(data,"对应收费项目下的列表")
+      success: (res) => {
+        console.log(res,"对应收费项目下的列表")
         this.setData({
-          list: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+          list: res.list || [],
+          count: res.count
         })
       }
     })
@@ -167,11 +170,11 @@ Page({
   /**
    * 新增收费记录
    */
-  onAddRecord(){
+  onAddRecord(e){
     let id = e.target.dataset.id;
-    // wx.navigateTo({
-    //   url: '../record/record?recordId=' + id + '&addType=' + this.data.tabs[this.data.index],
-    // })
+    wx.navigateTo({
+      url: '../addFeeRecord/addFeeRecord?recordId=' + id,
+    })
     /**
   * 添加记录
   */

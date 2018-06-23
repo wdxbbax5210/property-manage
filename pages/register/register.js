@@ -61,8 +61,8 @@ Page({
               // openId: getApp().globalData.openId,
               // sessionKey: getApp().globalData.sessionKey
             },
-            success: (data) => {
-              let userInfo = data.data.data;
+            success: (res) => {
+              let userInfo = res;
               getApp().globalData.header.Cookie = 'JSESSIONID=' + userInfo.sessionId;
               // getApp().globalData.requestId = userInfo.openId;
               wx.setStorageSync("userInfo", userInfo)

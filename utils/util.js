@@ -46,7 +46,7 @@ const NetRequest = ({ url, params, success}) => {
     method: 'POST',
     header: header,
     success: (data) => {
-      success && success(data)
+      success && success(data.data.data)
     }
   })
 }
