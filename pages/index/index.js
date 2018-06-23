@@ -41,8 +41,46 @@ Page({
    */
   onLoad: function (options) {
     util.setTitle("工作台");
+    let t = this;
+    wx.getSetting({
+      success: function (res) {
+        //已经授权 
+        if (!res.authSetting['scope.userInfo']) {
+          //从cookie中获取用户信息 给后台
+          console.log(wx.getStorageSync("userInfo").data)
+          let userInfo = wx.getStorageSync("userInfo").data;
+          getApp().globalData.header.Cookie = 'JSESSIONID=' + userInfo.sessionId;
+          getApp().globalData.requestId = userInfo.openId;
+        } else {
+          //没有授权 引导用户授权
+          t.showDialog()
+        }
+      }
+    })
   },
-
+  showDialog(){
+    let dialogComponent = this.selectComponent('.wxc-dialog')
+    dialogComponent && dialogComponent.show();
+  },
+  hideDialog() {
+    let dialogComponent = this.selectComponent('.wxc-dialog')
+    dialogComponent && dialogComponent.hide();
+  },
+  onCancel() {
+    console.log('点击了取消按钮')
+    this.hideDialog()
+  },
+  //确认授权
+  onConfirm() {
+    // this.login();
+    // wx.switchTab({
+    //   url: '../my/my',
+    // })
+    wx.navigateTo({
+      url: '../register/register',
+    })
+    this.hideDialog();
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

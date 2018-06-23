@@ -27,3 +27,13 @@
       <view>哈哈</view>
     </view>
   </view>
+   <wxc-dialog 
+    class="wxc-dialog" 
+    title="物业管理" 
+    content="物业管理申请获取您的昵称信息" 
+    confirm-text="点击注册" 
+    cancel-text="取消" 
+    bindconfirm="onConfirm" 
+    bindcancel="onCancel"
+  >
+  </wxc-dialog>

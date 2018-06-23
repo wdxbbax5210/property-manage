@@ -38,11 +38,13 @@ const getUserInfo = ()=>{
   return user;
 }
 const NetRequest = ({ url, params, success}) => {
-  console.log(getApp().globalData.origin + url)
+  let header = getApp().globalData.header;
+  params.requestId = getApp().globalData.requestId;
   wx.request({
     url: getApp().globalData.origin + url,
     data: params,
     method: 'POST',
+    header: header,
     success: (data) => {
       success && success(data)
     }

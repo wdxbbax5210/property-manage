@@ -17,7 +17,8 @@ Page({
    */
   onLoad: function (options) {
     util.setTitle("我的");
-    console.log(this.data.userInfo.data)
+    console.log(header)
+    console.log(this.data.userInfo.data,"userInfo")
     wx.getSetting({
       success: function (res) {
         console.log(res)
@@ -25,6 +26,9 @@ Page({
           this.setData({
             showRegister: true
           })
+        }else{
+          getApp().globalData.header.Cookie = 'JSESSIONID=' + res.sessionId;
+          wx.setStorageSync("userInfo", res)
         }
       }
     })

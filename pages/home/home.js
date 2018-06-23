@@ -6,15 +6,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userInfo: {},
+    userInfo: wx.getStorageSync("userInfo") || {},
     tabs: [
-      { 
-        title: '物业费', 
-        content: [
-          {
-            "title": "",
-          }
-        ]
+      { title: '物业费', content: [{"title": "",}]
        },
       { title: '电费', content: '内容二' },
       { title: '水费', content: '内容三' },
@@ -54,43 +48,29 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(getApp().globalData.origin)
     util.setTitle("查询费用");
-    let t = this;
-    wx.getSetting({
-      success: function (res) {
-        console.log(res)
-        //已经授权 跳转到首页
-        if (res.authSetting['scope.userInfo']) {
-          //从cookie中获取用户信息 给后台
+    this.getFeeList();
+  },
+  /**
+   * 获取收费项目列表 赋值给tabs
+   */
+  getFeeList(){
+    let params = {
+      itemName: "" //非必填 
+    }
+    util.NetRequest({
+      url: '/fee/item/list',
+      params: params,
+      success: (data) => {
+        if(data.list){
 
-        } else {
-          //没有授权 引导用户授权
-          let dialogComponent = t.selectComponent('.wxc-dialog')
-          dialogComponent && dialogComponent.show();
         }
+        this.setData({
+          tabs: data.list || []
+        })
+        console.log(data, "收费项目列表")
       }
     })
-  },
-  hideDialog() {
-    let dialogComponent = this.selectComponent('.wxc-dialog')
-    dialogComponent && dialogComponent.hide();
-  },
-  
-  //确认授权
-  onConfirm() {
-    // this.login();
-    // wx.switchTab({
-    //   url: '../my/my',
-    // })
-    wx.navigateTo({
-      url: '../register/register',
-    })
-    this.hideDialog();
-  },
-  onCancel() {
-    console.log('点击了取消按钮')
-    this.hideDialog()
   },
   onSearch() {
     wx.navigateTo({

@@ -48,9 +48,11 @@ Page({
               userInfo: userInfo
             },
             success: (data) => {
-              getApp().globalData.header.Cookie = 'JSESSIONID=' + data.data.data.sessionId;
+              console.log(data)
+              let userInfo = data.data.data;
+              getApp().globalData.header.Cookie = 'JSESSIONID=' + userInfo.sessionId;
+              getApp().globalData.requestId = userInfo.openId;
               wx.setStorageSync("userInfo", data.data)
-              //
               let dialogComponent = t.selectComponent('.wxc-dialog')
               dialogComponent && dialogComponent.show();
             }
@@ -65,7 +67,7 @@ Page({
     let dialogComponent = this.selectComponent('.wxc-dialog')
     dialogComponent && dialogComponent.hide();
     wx.switchTab({
-      url: '../home/home',
+      url: '../index/index',
     })
   },
   /**
