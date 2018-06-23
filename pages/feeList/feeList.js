@@ -91,6 +91,10 @@ Page({
   onCancel: function(){
     let dialogComponent = this.selectComponent('.wxc-dialog')
     dialogComponent && dialogComponent.hide();
+    this.setData({
+      itemName: null,
+      itemId: null
+    })
   },
   feeItemUpdate: function(){
     let t = this;
