@@ -37,7 +37,7 @@ const getUserInfo = ()=>{
   })
   return user;
 }
-const NetRequest = ({ url, params, success}) => {
+const NetRequest = ({ url, params, success, fail}) => {
   let header = getApp().globalData.header;
   params.requestId = getApp().globalData.requestId;
   wx.request({
@@ -46,7 +46,10 @@ const NetRequest = ({ url, params, success}) => {
     method: 'POST',
     header: header,
     success: (data) => {
-      success && success(data.data.data)
+      success && success(data.data)
+    },
+    fail: (err)=>{
+      fail && fail(err)
     }
   })
 }

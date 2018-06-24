@@ -14,7 +14,7 @@
   border-bottom: 2rpx solid #38ADFF;
 }
 .user-item {
-  padding: 24rpx;
+  padding: 36rpx;
   font-size: 28rpx;
   color: #333;
   border-bottom: 1px solid #ededed;
@@ -23,4 +23,18 @@
   text-align: right;
   color: #38ADFF;
   margin-left: 24rpx;
+}
+.no-data {
+  text-align: center;
+  font-size: 24rpx;
+  margin-top: 30rpx;
+  color: #999;
+}
+.scroll-view{
+  position:absolute;
+  top:88rpx;
+  bottom:0;
+  left:0;
+  right:0;
+  -webkit-overflow-scrolling: touch
 }

@@ -54,8 +54,9 @@
 }
 .scroll-view-item {
   height: auto;
-  line-height: 68rpx;
+  line-height: 88rpx;
   text-align: center;
+  border-bottom: 1rpx solid #efefef;
 }
 .no-data {
   text-align: center;
@@ -72,4 +73,15 @@
   bottom:20rpx;
   left: 0;
   right: 0;
+}
+.scroll-view{
+  position:absolute;
+  top:150rpx;
+  bottom:118rpx;
+  left:0;
+  right:0;
+  -webkit-overflow-scrolling: touch
+}
+.no-bottom{
+  bottom:0;
 }

@@ -54,7 +54,7 @@ Page({
       params: params,
       success: (res) => {
         t.setData({
-          feeList: res.list
+          feeList: res.data.list
         })
       }
     })
@@ -69,7 +69,7 @@ Page({
       url: "/fee/item/add",
       params: params,
       success: (data) => {
-        console.log(data, "新增收费项目")
+        console.log(data.data, "新增收费项目")
         t.setData({
           itemName: null,
           itemId: null
@@ -107,7 +107,7 @@ Page({
       url: '/fee/item/upd',
       params: params,
       success: (data) => {
-        console.log(data, "更新收费项目")
+        console.log(data.data, "更新收费项目")
         t.setData({
           itemName: null,
           itemId: null
@@ -126,7 +126,7 @@ Page({
       url: "/fee/item/del",
       params: params,
       success: (data) => {
-        console.log(data, "删除收费项目")
+        console.log(data.data, "删除收费项目")
         t.getFeeList()
       }
     })

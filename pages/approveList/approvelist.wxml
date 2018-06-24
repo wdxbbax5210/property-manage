@@ -1,19 +1,81 @@
 <!--pages/approveList/approvelist.wxml-->
 <view>
   <view class="tab t-FBH">
-    <view class="tab-item t-FB1 {{userType == 0 ? 'active':''}}"  data-active="0" bindtap='onChangeTab'>待审核</view>
-     <view class="tab-item t-FB1 {{userType == 1 ? 'active':''}}" data-active="1" bindtap='onChangeTab'>普通用户</view>
-    <view class="tab-item t-FB1 {{userType == 7 ? 'active':''}}" data-active="7" bindtap='onChangeTab'>普通员工</view> 
-    <view class="tab-item t-FB1 {{userType == 8 ? 'active':''}}" data-active="8" bindtap='onChangeTab'>管理员</view> 
+    <view 
+      class="tab-item t-FB1 {{userType == 0 ? 'active':''}}"  
+      data-active="0" 
+      bindtap='onChangeTab'
+      wx:if="{{myUserType > 1 }}"
+      >
+      待审核
+      </view>
+     <view 
+      class="tab-item t-FB1 {{userType == 1 ? 'active':''}}" 
+      data-active="1" 
+      bindtap='onChangeTab'
+      wx:if="{{myUserType > 1 }}"
+      >
+      普通用户
+      </view>
+    <view 
+      class="tab-item t-FB1 {{userType == 7 ? 'active':''}}" 
+      data-active="7" 
+      bindtap='onChangeTab'
+      wx:if="{{myUserType > 7 }}"
+      >
+      普通员工
+      </view> 
+    <view 
+      class="tab-item t-FB1 {{userType == 8 ? 'active':''}}" 
+      data-active="8" 
+      bindtap='onChangeTab'
+      wx:if="{{myUserType > 8 }}"
+      >
+      管理员
+      </view> 
   </view>
-  <scroll-view scroll-y style="height: auto;" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
-    <view class="user-list"  wx:for="{{list}}"  wx:for-index="index" wx:key="{{item.id}}">
+  <scroll-view 
+    scroll-y 
+    bindscrolltolower="lower" 
+    scroll-into-view="{{toView}}" 
+    scroll-top="{{scrollTop}}"
+    wx:if="{{list.length}}"
+    class="scroll-view"
+    >
+    <view 
+      class="user-list"  
+      wx:for="{{list}}"  
+      wx:for-index="index" 
+      wx:key="{{item.id}}"
+      >
       <view class="user-item t-FBH">
-        <view class="name t-FB1">{{item.userName}}</view>
-        <view class="operate-btn " bindtap='userVerify' data-item="{{item}}">设为普通用户</view>
-        <view class="operate-btn {{userType == 1 ?'hide':''}}" bindtap='userVerify' data-item="{{item}}">设为普通员工</view>
-        <view class="operate-btn {{userType == 1 || userType == 7 ?'hide':''}}" data-item="{{item}}" bindtap='userVerify'>设为管理员</view>
+        <view class="name t-FB1">{{item.nickName}}</view>
+        <view 
+          class="operate-btn {{userType == 1 || myUserType < 7 ?'hide':''}}" 
+          bindtap='userVerify' 
+          data-type="{{1}}"
+          data-item="{{item}}"
+          >
+          设为普通用户
+          </view>
+        <view 
+          class="operate-btn {{userType == 7 || myUserType < 8?'hide':''}}" 
+          bindtap='userVerify' 
+          data-type="{{7}}"
+          data-item="{{item}}"
+          >
+          设为普通员工
+          </view>
+        <view 
+          class="operate-btn {{userType == 8 || myUserType < 9 ?'hide':''}}" 
+          data-type="{{8}}" 
+          data-item="{{item}}"
+          bindtap='userVerify'
+          >
+          设为管理员
+          </view>
       </view>
     </view>
   </scroll-view>
+  <view wx:else class="no-data">暂无数据</view>
 </view>

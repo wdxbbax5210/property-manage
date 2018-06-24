@@ -6,9 +6,13 @@ Page({
    * 页面的初始数据
    */
   data: {
-    list: [{ id: 1, userName: "测试名字1", userType: "0" }, { id: 2, userName: "测试名字2",userType: "1"}],
+    list: [],
     userType: 0, //用户类型  0未审核 1普通用户 7普通员工  8管理员 9超级管理员 默认显示待审核列表
-    userInfo: wx.getStorageSync("userInfo")
+    userInfo: wx.getStorageSync("userInfo"),
+    page: 1,
+    pageSize: 10,
+    count: 0,
+    myUserType:null,
   },
   onChangeTab(event){
     let tab = event.target.dataset.active;
@@ -26,22 +30,47 @@ Page({
     // this.getUser();
     console.log(this.data.userInfo.userType,"我的身份")
     this.queryUserList(); 
+    this.setData({
+      myUserType: parseInt(this.data.userInfo.userType)
+    })
   },
   queryUserList: function (){
     let params = {
       userType: this.data.userType, //查询的用户类型列表
       nickName:  null,  //昵称
       unitNumber: null, //单元编号
-      phoneNumber: null //手机号码
+      phoneNumber: null, //手机号码
+      page: this.data.page,
+      pageSize: this.data.pageSize
     }
-    console.log(params)
+    let t = this;
     util.NetRequest({
       url: '/user/list',
       params: params,
-      success: (data) => {
-        console.log(data, "用户列表")
+      success: (res) => {
+        console.log(res.data, "用户列表")
+        let _list = res.data.list || [];
+        if (params.page > 1){
+          _list = t.data.list.concat(res.data.list)
+        }
+        this.setData({
+          list: _list,
+          count: res.data.count
+        })
       }
     })
+  },
+  lower(){
+    if (this.data.page * this.data.pageSize < this.data.count){
+      console.log("到底了！请求下一页")
+      this.setData({
+        page: this.data.page + 1
+      }, () => {
+        this.queryUserList();
+      })
+    }else{
+      console.log("没有数据了")
+    }
   },
   /**
    * 设置用户身份
@@ -51,14 +80,14 @@ Page({
     let it = event.target.dataset.item;
     let params = {
       userId: it.id,
-      userType: it.userType
+      userType: event.target.dataset.type
     }
-    console.log(params)
     util.NetRequest({
       url: '/user/verify',
       params: params,
       success: (data) =>{
-        console.log(data, "用户verify")
+        console.log(data.data, "用户verify")
+        this.queryUserList();
       }
     })
   },

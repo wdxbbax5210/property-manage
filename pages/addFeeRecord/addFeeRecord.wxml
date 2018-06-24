@@ -1,14 +1,24 @@
 <!--pages/addFeeRecord/addFeeRecord.wxml-->
 <view class=" main">
   <view class="section">
+    <view class="item " wx:if="{{!recordId}}">
+      <view 
+        class="title" 
+        bindtap='onSelectUser'
+        >
+        选择用户
+      </view>
+      <view>{{userName ? userName : "请选择"}}</view>
+      <image class="img" src="../../images/arrow-right.png"></image>
+    </view>
     <view class="item " >
-      <view class="title">缴费金额</view>
+      <view class="title">单元编号</view>
       <input 
         type="text" 
         class="input" 
-        placeholder='输入缴费金额(必填)' 
-        value="{{amount}}" 
-        bindinput='onAmountChange'
+        placeholder='请输入' 
+        value="{{unitNumber}}" 
+        bindinput='onUnitChange'
         />
     </view>
     <picker 
@@ -26,6 +36,16 @@
         <image class="img" src="../../images/arrow-right.png"></image>
       </view>
     </picker>
+    <view class="item " >
+      <view class="title">应收金额</view>
+      <input 
+        type="text" 
+        class="input" 
+        placeholder='请输入' 
+        value="{{amount}}" 
+        bindinput='onAmountChange'
+        />
+    </view>
   </view>
    <button 
     class="btn-login t-FB1 " 
@@ -36,6 +56,6 @@
     </button>
     <wxc-toast
     is-show="{{$toast.show}}"
-    text="请输入金额或日期"></wxc-toast>
+    text="{{message?message:'信息填写不完整'}}"></wxc-toast>
 </view>
 

@@ -63,9 +63,8 @@ Page({
             url: '/user/login/check',
             params: params,
             success: (res) => {
-              let userInfo = res.userInfo;
+              let userInfo = res.data.userInfo;
               if (userInfo && !util.isEmptyObj(userInfo)){ //注册过
-                console.log(userInfo.sessionId)
                 getApp().globalData.header.Cookie = 'JSESSIONID=' + userInfo.sessionId;
                 let ifHaveRight = false;
                 //当前用户不是未知身份 且不是普通用户
@@ -76,6 +75,7 @@ Page({
                   userInfo: userInfo,
                   ifHaveRight: ifHaveRight
                 })
+                wx.setStorageSync("userInfo", userInfo)
                 if (userInfo.userType == "0"){ //当前用户身份未知时跳转到等待页面
                   wx.reLaunch({
                     url: '../noAccess/noAccess'
@@ -86,7 +86,7 @@ Page({
                 getApp().globalData.sessionKey = res.sessionKey;
                 t.showDialog();
               }
-              console.log(res, "校验是否注册过")
+              console.log(res.data, "校验是否注册过")
             }
           })
         } else {
@@ -134,6 +134,11 @@ Page({
       url: '../register/register',
     })
     this.hideDialog();
+  },
+  upload(){
+    // wx.openDocument({
+
+    // })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

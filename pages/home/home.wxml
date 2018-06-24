@@ -87,19 +87,17 @@
       </view>
       <scroll-view 
         scroll-y 
-        style="height: auto; margin-bottom: 118rpx" 
-        bindscrolltoupper="upper" 
         bindscrolltolower="lower" 
-        bindscroll="scroll" 
-        scroll-into-view="{{toView}}" 
         scroll-top="{{scrollTop}}"
+        class="{{operateRight ? 'scroll-view' : 'scroll-view no-bottom'}} "
         >
         <view class="scroll-view-head scroll-view-item t-FBH">
-          <view class="t-FB1">单元编号</view>
-          <view class="t-FB1">收费项目</view>
+          <view class="t-FB1">昵称</view>
+          <!-- <view class="t-FB1">收费项目</view> -->
           <view class="t-FB1">所属月份</view>
           <view class="t-FB1">应收金额</view>
-          <view class="t-FB1">开票月份</view>
+          <view class="t-FB1">实收金额</view>
+          <view class="t-FB1">开票状态</view>
           <view class="t-FB1">缴费状态</view>
         </view>
         <view 
@@ -113,25 +111,28 @@
             bindchange="bindhandleChange" 
             range="{{status}}" 
             wx:if="{{operateRight}}" 
-            data-id="{{100}}" 
-            data-amount="{{200}}"
+            data-id="{{item.id}}" 
+            data-amount="{{item.planPayFee}}"
+            data-item="{{item}}"
             >
             <view class="scroll-view-item t-FBH">
-              <view class="t-FB1">{{item.id}}</view>
-              <view class="t-FB1">电费</view>
-              <view class="t-FB1">2018年6月</view>
-              <view class="t-FB1">12700</view>
-              <view class="t-FB1">2018年8月</view>
-              <view class="t-FB1">未缴费</view>
+              <view class="t-FB1">{{item.nickName}}</view>
+              <!-- <view class="t-FB1">{{item.itemName}}</view> -->
+              <view class="t-FB1">{{item.theMonth}}</view>
+              <view class="t-FB1">{{item.planPayFee}}</view>
+              <view class="t-FB1">{{item.realPayFee}}</view>
+              <view class="t-FB1">{{item.ticketStatus ? "已开票" : "未开票"}}</view>
+              <view class="t-FB1">{{item.payStatus ? "已缴费":"未缴费"}}</view>
             </view>
           </picker>
           <view class="scroll-view-item t-FBH" wx:else>
-              <view class="t-FB1">{{item.id}}</view>
-              <view class="t-FB1">水费</view>
-              <view class="t-FB1">2018年6月</view>
-              <view class="t-FB1">12700</view>
-              <view class="t-FB1">2018年8月</view>
-              <view class="t-FB1">未缴费</view>
+              <view class="t-FB1">{{item.nickName}}</view>
+              <!-- <view class="t-FB1">{{item.itemName}}</view> -->
+              <view class="t-FB1">{{item.theMonth}}</view>
+              <view class="t-FB1">{{item.planPayFee}}</view>
+              <view class="t-FB1">{{item.realPayFee}}</view>
+              <view class="t-FB1">{{item.ticketStatus ? "已开票" : "未开票"}}</view>
+              <view class="t-FB1">{{item.payStatus ? "已缴费":"未缴费"}}</view>
             </view>
         </view>
         <view class="no-data" wx:if="{{list.length == 0}}">
@@ -142,8 +143,6 @@
         class="btn-add t-FB1 " 
         type='default' 
         bindtap='onAddRecord' 
-        data-id="{{100}}" 
-        data-amount="{{200}}"
         wx:if="{{operateRight}}" 
         >
         新增记录

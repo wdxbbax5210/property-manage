@@ -5,11 +5,11 @@
     "pages/my/my",
     "pages/logs/logs",
     "pages/approveList/approvelist",
-    "pages/feeEntry/feeEntry",
     "pages/register/register",
     "pages/feeList/feeList",
     "pages/noAccess/noAccess",
     "pages/record/record",
+    "pages/selectUser/selectUser",
     "pages/addFeeRecord/addFeeRecord"
   ],
   "window": {

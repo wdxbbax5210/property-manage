@@ -16,11 +16,11 @@ Page({
    */
   onLoad: function (options) {
     console.log(options)
-    options={
-      amount: "200",  //缴费金额
-      recordId:"1",  //记录id
-      type:"0",  //编辑类型 标记为已缴费或标记为已开票
-    }
+    // options={
+    //   amount: "200",  //缴费金额
+    //   recordId:"1",  //记录id
+    //   type:"0",  //编辑类型 标记为已缴费或标记为已开票
+    // }
     this.setData({
       amount: options.amount || "",
       recordId: options.recordId,

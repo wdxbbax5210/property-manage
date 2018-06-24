@@ -14,7 +14,7 @@ Page({
     date: '',
     list: [],
     operateRight: null,
-    status: ["已缴费","已开票","删除","编辑"],
+    status: ["记录缴费", "记录开票", "编辑", "删除"],
     selectedStatus: 0,
     page: 1,
     pageSize: 10,
@@ -32,7 +32,16 @@ Page({
     })
   },
   lower: function (e) {
-    console.log(e)
+    if (this.data.page * this.data.pageSize < this.data.count) {
+      console.log("到底了！请求下一页")
+      this.setData({
+        page: this.data.page + 1
+      }, () => {
+        this.onQueryDetailList();
+      })
+    } else {
+      console.log("没有数据了")
+    }
   },
   /**
    * 选择缴费状态
@@ -51,7 +60,9 @@ Page({
   onClick: function (e) {
     this.setData({
       date: "",
-      index: e.detail.key
+      index: e.detail.key,
+      page: 1,
+      count: 0
     },()=>{
       this.onQueryDetailList();
     })
@@ -61,13 +72,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    util.setTitle("查询费用");
+    util.setTitle("费用查询");
     console.log(options.operateRight)
     if (options.operateRight){
       this.setData({
         operateRight: options.operateRight
       })
-      util.setTitle("管理");
+      util.setTitle("费用录入");
     }
     let _userInfo = wx.getStorageSync("userInfo").data
     if (_userInfo){
@@ -80,20 +91,25 @@ Page({
    * 操作 标记为已开票 标记为 已缴费
    */
   bindhandleChange(e){
-    console.log('缴费状态或者开票状态改变，携带值为', e.detail.value)
+    // console.log('缴费状态或者开票状态改变，携带值为', e.detail.value)
     this.setData({
       selectedStatus: e.detail.value
     },()=>{
       //刷新列表状态
-      console.log(e.target.dataset)
       let id = e.target.dataset.id;
       let amount = e.target.dataset.amount;
       if (e.detail.value == 0 || e.detail.value == 1){
         wx.navigateTo({
           url: '../record/record?recordId=' + id + '&amount=' + amount + '&type=' + e.detail.value,
         })
-      } else if (e.detail.value == 2){ //删除该条记录
+      } else if (e.detail.value == 3){ //删除该条记录
         this.delFeeItem(id);
+      } else if (e.detail.value == 2){
+        console.log("编辑去")
+        console.log(e.target.dataset)
+        wx.navigateTo({
+          url: '../addFeeRecord/addFeeRecord?item=' + JSON.stringify(e.target.dataset.item),
+        })
       }
     })
   },
@@ -125,11 +141,11 @@ Page({
       params: params,
       success: (res) => {
         this.setData({
-          tabs: res.list,
+          tabs: res.data.list,
         },()=>{
           this.onQueryDetailList()
         })
-        console.log(res, "收费项目列表")
+        console.log(res.data, "收费项目列表")
       }
     })
   },
@@ -159,10 +175,13 @@ Page({
         pageSize: this.data.pageSize
       },
       success: (res) => {
-        console.log(res,"对应收费项目下的列表")
+        let _list = res.data.list || [];
+        if (t.data.page > 1 && res.data.list) {
+          _list = t.data.list.concat(res.data.list)
+        }
         this.setData({
-          list: res.list || [],
-          count: res.count
+          list: _list,
+          count: res.data.count
         })
       }
     })
@@ -170,10 +189,9 @@ Page({
   /**
    * 新增收费记录
    */
-  onAddRecord(e){
-    let id = e.target.dataset.id;
+  onAddRecord(){
     wx.navigateTo({
-      url: '../addFeeRecord/addFeeRecord?recordId=' + id,
+      url: '../addFeeRecord/addFeeRecord?itemId=' + this.data.tabs[this.data.index].id,
     })
     /**
   * 添加记录

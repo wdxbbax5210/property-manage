@@ -1,14 +1,14 @@
 <!--pages/record/record.wxml-->
 <view class=" main">
   <view class="section">
-    <view class="item " >
+    <view class="item " wx:if="{{type == 0}}">
       <view class="title">缴费金额</view>
-      <input type="text" class="input" placeholder='输入缴费金额(必填)' value="{{amount}}" bindinput='onAmountChange' wx:if="{{type == 0}}"/>
+      <input type="text" class="input" placeholder='输入缴费金额(必填)' value="{{amount}}" bindinput='onAmountChange'/>
       <image class="img" src="../../images/arrow-right.png"></image>
     </view>
-    <picker mode="date" value="{{date}}" fields="month" start="2015-09"  bindchange="onDateChange">
+    <picker mode="date" value="{{date}}" fields="day" start="2015-09-01"  bindchange="onDateChange">
       <view class="item " >
-        <view class="title">{{type == "0" ? "选择缴费时间" : "选择开票时间"}}</view>
+        <view class="title">{{type == 0 ? "选择缴费时间" : "选择开票时间"}}</view>
         <view>{{date}}</view>
         <image class="img" src="../../images/arrow-right.png"></image>
       </view>
