@@ -136,7 +136,7 @@
           </view>
         </view> -->
       <view class="no-data" wx:if="{{list.length == 0}}">
-        暂时没有收费记录
+        <wxc-abnor type="DATA" title="没有收费记录"></wxc-abnor>
       </view>
     </scroll-view>
     <button class="btn-add t-FB1 " type='default' bindtap='onAddRecord' wx:if="{{operateRight}}">
@@ -144,6 +144,6 @@
     </button>
   </view>
   <view wx:else class="no-data">
-    暂时没有收费项目
+    <wxc-abnor type="MESSAGE" title="没有收费项目"></wxc-abnor>
   </view>
 </view>
