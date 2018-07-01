@@ -1,4 +1,5 @@
 /* pages/my/my.wxss */
+
 .my {
   /* padding: 12px; */
   height: 100%;
@@ -9,11 +10,11 @@
   background-color: #fff;
   text-align: center;
   padding: 15px 12px;
-  border-top:1px solid #ededed;
-  border-bottom:1px solid #ededed;
+  border-top: 1px solid #ededed;
+  border-bottom: 1px solid #ededed;
   display: flex;
-  margin-top:12px;
 }
+
 .userinfo {
   width: 50px;
   height: 50px;
@@ -21,32 +22,94 @@
   border-radius: 50%;
   overflow: hidden;
 }
+
 .userName {
   padding: 0 12px;
   font-size: 14px;
   margin-top: 10px;
-  color: #4A4A4A;
+  color: #4a4a4a;
 }
+
 .btn-login {
-  border:none!important;
-  height:60rpx;
-  line-height:60rpx;
-  font-size:28rpx;
-  background-color:#fff;
+  border: none !important;
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 28rpx;
+  background-color: #fff;
   margin-left: 20rpx;
-  color: #38ADFF;
+  color: #38adff;
 }
+
 .hide {
   display: none;
 }
+
 .register-btn {
-  text-align:center;
-  width:100%;
+  text-align: center;
+  width: 100%;
 }
+
 .register {
   height: 80rpx;
   line-height: 80rpx;
   margin: 0 auto;
-  width:200rpx;
-  font-size:32rpx;
+  width: 200rpx;
+  font-size: 32rpx;
+}
+
+.list-wrap {
+  width: 100%;
+}
+
+.list-item {
+  background: #fff;
+  margin-bottom: 30rpx;
+}
+
+.list-item:last-child {
+  margin: 0;
+}
+
+.list-check {
+  display: flex;
+  align-items: center;
+}
+
+.check-wrap {
+  position: relative;
+  width: 40rpx;
+  height: 40rpx;
+  margin-left: 30rpx;
+  border-radius: 100%;
+  border: 1px solid #d8d8d8;
+}
+
+.check {
+  position: absolute;
+  top: 0;
+  left: -2rpx;
+  width: 100%;
+  height: 100%;
+  line-height: 42rpx;
+}
+
+.list-image {
+  width: 102rpx;
+  height: 102rpx;
+  margin-left: 30rpx;
+}
+
+.radius {
+  border-radius: 100px;
+}
+
+.item {
+  flex: 1;
+  display:block;
+}
+
+.list-image {
+  width: 102rpx;
+  height: 102rpx;
+  background: #d8d8d8;
 }
