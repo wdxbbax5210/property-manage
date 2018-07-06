@@ -31,12 +31,12 @@ Page({
   },
   goQueryOperate: function(){
     wx.navigateTo({
-      url: '../home/home?operateRight=1',
+      url: '../feeRecordList/home?operateRight=1',
     })
   },
   goQuery: function (){
     wx.navigateTo({
-      url: '../home/home',
+      url: '../feeRecordList/home',
     })
   },
   goToFeeList: function () {

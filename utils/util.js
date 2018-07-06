@@ -46,7 +46,11 @@ const NetRequest = ({ url, params, success, fail}) => {
     method: 'POST',
     header: header,
     success: (data) => {
-      success && success(data.data)
+      if (data.data){
+        success && success(data.data)
+      }else{
+        console.log(data)
+      }
     },
     fail: (err)=>{
       fail && fail(err)

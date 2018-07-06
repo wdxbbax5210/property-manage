@@ -50,6 +50,14 @@ Page({
         itemId: options.itemId
       })
     }
+    /**
+     * 从选人页面回来 需要将后退页码改为2 才会退回到列表页
+     */
+    if(options.from == "selectuser"){
+        this.setData({
+          backNumber: 2
+        })
+    }
     if (this.data.recordId) {
       util.setTitle("编辑记录")
     } else {
@@ -57,12 +65,8 @@ Page({
     }
   },
   onSelectUser(){
-    this.setData({
-      backNumber: 2
-    },()=>{
-      wx.navigateTo({
-        url: '../selectUser/selectUser?itemId=' + this.data.itemId,
-      })
+    wx.navigateTo({
+      url: '../selectUser/selectUser?itemId=' + this.data.itemId,
     })
   },
   onUnitChange(e){
@@ -110,14 +114,28 @@ Page({
       url: url,
       params: params,
       success: (res) => {
-        wx.navigateBack({
-          delta: t.data.backNumber
-        })
+        console.log(res)
+        if(res.result == "313"){
+          t.setData({
+            message: res.message
+          },()=>{
+            let dialogComponent = t.selectComponent('.wxc-dialog')
+            dialogComponent && dialogComponent.show();
+          })
+        }else{
+          wx.navigateBack({
+            delta: t.data.backNumber
+          })
+        }
       },
       fail: (err)=>{
         console.log(err)
       }
     })
+  },
+  btnConfirm() {
+    let dialogComponent = this.selectComponent('.wxc-dialog')
+    dialogComponent && dialogComponent.hide();
   },
   /**
    * 提示

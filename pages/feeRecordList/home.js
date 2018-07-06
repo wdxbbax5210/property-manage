@@ -1,4 +1,3 @@
-// pages/home/home.js
 import util from "../../utils/util.js";
 // 仅限查询数据 
 Page({

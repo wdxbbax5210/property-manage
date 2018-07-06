@@ -139,9 +139,15 @@
         <wxc-abnor type="DATA" title="没有收费记录"></wxc-abnor>
       </view>
     </scroll-view>
-    <button class="btn-add t-FB1 " type='default' bindtap='onAddRecord' wx:if="{{operateRight}}">
-      新增记录
-    </button>
+    <view class="bottom" wx:if="{{operateRight}}">
+      <button 
+        class="btn-add t-FB1 " 
+        type='default' 
+        bindtap='onAddRecord' 
+        >
+        新增记录
+      </button>
+    </view>
   </view>
   <view wx:else class="no-data">
     <wxc-abnor type="MESSAGE" title="没有收费项目"></wxc-abnor>

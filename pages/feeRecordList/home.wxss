@@ -64,15 +64,20 @@
   margin-top: 30rpx;
   color: #999;
 }
+.bottom {
+  height: 118rpx;
+  background: #F0F4F3;
+  position: fixed;
+  bottom:0;
+  left: 0;
+  right: 0;
+}
 .btn-add {
   margin: 0 30rpx;
   height: 88rpx;
   line-height: 88rpx;
   font-size: 28rpx;
-  position: fixed;
-  bottom:20rpx;
-  left: 0;
-  right: 0;
+  margin-top: 15rpx;
 }
 .btn-view {
   height: 108rpx;
