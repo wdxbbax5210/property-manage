@@ -16,3 +16,6 @@
   margin: 0 auto;
   margin-bottom: 12rpx;
 }
+image.slide-image {
+  width: 100%!important;
+}

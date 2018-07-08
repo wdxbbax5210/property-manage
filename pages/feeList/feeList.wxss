@@ -3,6 +3,7 @@
   height: auto;
   background-color: #fff;
   padding: 24rpx;
+  -webkit-overflow-scrolling: touch;
 }
 .feeItem{
   border-bottom: 1px solid #ededed;

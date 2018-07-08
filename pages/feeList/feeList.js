@@ -5,10 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    feeList:[
-      // {id:"1",itemName:"电费测试1"},
-      // {id:"2",itemName:"电费测试2"}
-    ],
+    feeList:[],
     itemName: null,
     itemId: null, //编辑的id
     page: 1,
@@ -19,29 +16,30 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getFeeList();
     util.setTitle("收费项目")
   },
   Add: function(){
     let t = this;
-    let dialogComponent = t.selectComponent('.wxc-dialog')
-    dialogComponent && dialogComponent.show();
+    // let dialogComponent = t.selectComponent('.wxc-dialog')
+    // dialogComponent && dialogComponent.show();
+    wx.navigateTo({
+      url: '../feeItemAdd/feeItemAdd',
+    })
   },
   Edit: function(event){
     let t = this;
-    this.setData({
-      itemName: event.target.dataset.name,
-      itemId: event.target.dataset.id
-    },()=>{
-      let dialogComponent = t.selectComponent('.wxc-dialog')
-      dialogComponent && dialogComponent.show();
+    // this.setData({
+    //   itemName: event.target.dataset.name,
+    //   itemId: event.target.dataset.id
+    // },()=>{
+    //   let dialogComponent = t.selectComponent('.wxc-dialog')
+    //   dialogComponent && dialogComponent.show();
+    // })
+    wx.navigateTo({
+      url: '../feeItemAdd/feeItemAdd?itemName=' + event.target.dataset.name + '&itemId=' + event.target.dataset.id,
     })
   },
-  OnNameChange(event){
-    this.setData({
-      itemName: event.detail.value
-    })
-  },
+ 
   getFeeList(){
     let params = {
       itemName: this.data.itemName, //非必填 
@@ -59,64 +57,24 @@ Page({
       }
     })
   },
-  feeItemAdd: function(){
-    let params = {
-      itemName: this.data.itemName //必填 
-    }
-    console.log("新增")
-    let t = this;
-    util.NetRequest({
-      url: "/fee/item/add",
-      params: params,
-      success: (data) => {
-        console.log(data.data, "新增收费项目")
-        t.setData({
-          itemName: null,
-          itemId: null
-        },()=>{
-          t.getFeeList()
-        })
-      }
-    })
-  },
-  onConfirm: function(){
-    if(this.data.itemId){
-      this.feeItemUpdate();
-    }else{
-      this.feeItemAdd();
-    }
-    let dialogComponent = this.selectComponent('.wxc-dialog')
-    dialogComponent && dialogComponent.hide();
-  },
-  onCancel: function(){
-    let dialogComponent = this.selectComponent('.wxc-dialog')
-    dialogComponent && dialogComponent.hide();
-    this.setData({
-      itemName: null,
-      itemId: null
-    })
-  },
-  feeItemUpdate: function(){
-    let t = this;
-    let params = {
-      itemName: this.data.itemName, //必填 
-      itemId: this.data.itemId, //项目Id 必填
-    }
-    console.log("编辑")
-    util.NetRequest({
-      url: '/fee/item/upd',
-      params: params,
-      success: (data) => {
-        console.log(data.data, "更新收费项目")
-        t.setData({
-          itemName: null,
-          itemId: null
-        },()=>{
-          t.getFeeList()
-        })
-      }
-    })
-  },
+  // onConfirm: function(){
+  //   if(this.data.itemId){
+  //     this.feeItemUpdate();
+  //   }else{
+  //     this.feeItemAdd();
+  //   }
+  //   let dialogComponent = this.selectComponent('.wxc-dialog')
+  //   dialogComponent && dialogComponent.hide();
+  // },
+  // onCancel: function(){
+  //   let dialogComponent = this.selectComponent('.wxc-dialog')
+  //   dialogComponent && dialogComponent.hide();
+  //   this.setData({
+  //     itemName: null,
+  //     itemId: null
+  //   })
+  // },
+  
   feeItemDel: function (event){
     let params = {
       itemId: event.target.dataset.id, //项目Id 必填
@@ -142,7 +100,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    this.getFeeList();
   },
 
   /**

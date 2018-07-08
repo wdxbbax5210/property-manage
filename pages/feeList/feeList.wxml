@@ -15,7 +15,7 @@
       </view>
       <button type="default" class="add" bindtap='Add'>新增</button>
     </view>
-    <wxc-dialog 
+    <!-- <wxc-dialog 
       class="wxc-dialog" 
       title="{{itemId ? '编辑收费项目':'新增收费项目'}}" 
       confirm-text="确认" 
@@ -31,6 +31,6 @@
       placeholder='请输入' 
       value="{{itemName}}"
     />
-  </wxc-dialog>
+  </wxc-dialog> -->
   </scroll-view>
 
