@@ -16,3 +16,10 @@
   margin: 0 auto;
   margin-bottom: 12rpx;
 }
+
+swiper-item image {
+width:100%;
+height:240px;
+display:inline-block;
+overflow:hidden;
+}
