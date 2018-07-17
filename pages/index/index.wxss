@@ -17,9 +17,6 @@
   margin-bottom: 12rpx;
 }
 
-swiper-item image {
-width:100%;
-height:240px;
-display:inline-block;
-overflow:hidden;
+image.slide-image {
+  width: 100%!important;
 }

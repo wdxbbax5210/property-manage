@@ -1,4 +1,7 @@
 /* pages/home/home.wxss */
+.page {
+  -webkit-overflow-scrolling: touch;
+}
 .slide-image{  
     width: 100%;  
 } 
@@ -223,3 +226,4 @@
 .container .feed-item .feed-content .answer-actions .dot ::after{
   content: "•";
 }
+

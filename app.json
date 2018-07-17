@@ -10,7 +10,8 @@
     "pages/noAccess/noAccess",
     "pages/record/record",
     "pages/selectUser/selectUser",
-    "pages/addFeeRecord/addFeeRecord"
+    "pages/addFeeRecord/addFeeRecord",
+    "pages/feeItemAdd/feeItemAdd"
   ],
   "window": {
     "backgroundTextStyle": "light",
