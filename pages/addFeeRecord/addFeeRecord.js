@@ -93,16 +93,27 @@ Page({
    */
   onConfirm(){
     let t = this;
-    if (!this.data.amount || !this.data.date || !this.data.userId || !this.data.unitNumber){
-      this.showToast()
-      return
+    if (!this.data.amount){
+      this.showToast('应收金额必须输入！');
+      return;
+    }
+    if (!this.data.date) {
+      this.showToast('所属月份必须选择！');
+      return;
+    }
+    if (!this.data.userId) {
+      this.showToast('请选择用户！');
+      return;
+    }
+    if (!this.data.unitNumber) {
+      this.showToast('该用户还没有单元编号，请先去填写！');
+      return;
     }
     let params = {
       userId: this.data.userId, 
       planPayFee: this.data.amount || null,  
       itemId: this.data.itemId || null, 
       theMonth: this.data.date || null,
-      unitNumber: this.data.unitNumber || null,
       recordId: this.data.recordId || null
     }
     
@@ -140,18 +151,10 @@ Page({
   /**
    * 提示
    */
-  showToast() {
-    this.setData({
-      $toast: {
-        show: true
-      }
-    })
+  showToast(msg) {
+    this.setData({message: msg, $toast: { show: true } });
     setTimeout(() => {
-      this.setData({
-        $toast: {
-          show: false
-        }
-      })
+      this.setData({message: null, $toast: { show: false }});
     }, 1000)
   },
   /**

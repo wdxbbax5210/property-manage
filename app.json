@@ -9,8 +9,8 @@
     "pages/feeList/feeList",
     "pages/noAccess/noAccess",
     "pages/record/record",
-    "pages/selectUser/selectUser",
     "pages/addFeeRecord/addFeeRecord",
+    "pages/selectUser/selectUser",
     "pages/feeItemAdd/feeItemAdd"
   ],
   "window": {
